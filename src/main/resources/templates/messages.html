@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="hu"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Üzenetek</title>
+</head>
+
+<body>
+
+<div th:replace="~{menu :: menu}"></div>
+
+<hr>
+<p>
+    Bejelentkezve:
+    <strong sec:authentication="name"></strong>
+</p>
+<h1>Üzenetek</h1>
+
+<p>
+    A mozi adatbázis adatai hamarosan itt jelennek meg.
+</p>
+
+</body>
+</html>

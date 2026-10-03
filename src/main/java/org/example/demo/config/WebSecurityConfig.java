@@ -1,4 +1,5 @@
 package org.example.demo.config;
+
 import org.example.demo.service.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,22 +9,27 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
 @Configuration
 public class WebSecurityConfig {
     private final CustomUserDetailsService userDetailsService;
+
     public WebSecurityConfig(CustomUserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider(userDetailsService);
         provider.setPasswordEncoder(passwordEncoder());
         return provider;
     }
+
     @Bean
     public AuthenticationSuccessHandler authenticationSuccessHandler() {
         return (request, response, authentication) -> {
@@ -38,15 +44,37 @@ public class WebSecurityConfig {
             }
         };
     }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http)
             throws Exception {
-                http
+        http
                 .authenticationProvider(authenticationProvider())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/register", "/login", "/css/**", "/js/**").permitAll()
-                        .requestMatchers("/user").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers("/admin").hasRole("ADMIN")
+                        .requestMatchers(
+                                "/",
+                                "/adatbazis",
+                                "/kapcsolat",
+                                "/diagram",
+                                "/rest",
+                                "/register",
+                                "/login",
+                                "/css/**",
+                                "/js/**",
+                                "/images/**",
+                                "/assets/**"
+                        ).permitAll()
+
+                        .requestMatchers(
+                                "/user",
+                                "/uzenetek"
+                        ).hasAnyRole("USER", "ADMIN")
+
+                        .requestMatchers(
+                                "/admin",
+                                "/crud"
+                        ).hasRole("ADMIN")
+
                         .anyRequest()
                         .authenticated()
                 )
@@ -66,7 +94,7 @@ public class WebSecurityConfig {
                         )
                         .defaultAuthenticationEntryPointFor(
                                 (request, response, authException) ->
-                                        response.sendRedirect("/"),request -> request.getRequestURI().equals("/admin")
+                                        response.sendRedirect("/"), request -> request.getRequestURI().equals("/admin")
                         )
                         .accessDeniedHandler(
                                 (request, response, accessDeniedException) -> response.sendRedirect("/")

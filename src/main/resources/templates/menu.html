@@ -1,16 +1,64 @@
 <!DOCTYPE html>
-<html   xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <body>
-    <nav th:fragment="menu">
-        <a th:href="@{/}">Home</a>
-        <span sec:authorize="isAuthenticated()"> | <a th:href="@{/user}">User</a></span>
-        <span sec:authorize="hasRole('ADMIN')"> | <a th:href="@{/admin}">Admin</a></span>
-        <span sec:authorize="isAnonymous()"> | <a th:href="@{/register}">Register</a>  | <a th:href="@{/login}">Login</a></span>
-        <span sec:authorize="isAuthenticated()"> |
-            <form th:action="@{/logout}" method="post" style="display: inline">
-                <button type="submit">Logout</button>
-            </form>
-        </span>
-    </nav>
+
+<nav th:fragment="menu">
+
+    <a th:href="@{/}">Főoldal</a>
+
+    |
+    <a th:href="@{/adatbazis}">Adatbázis</a>
+
+    |
+    <a th:href="@{/kapcsolat}">Kapcsolat</a>
+
+    |
+    <a th:href="@{/diagram}">Diagram</a>
+
+    |
+    <a th:href="@{/rest}">REST</a>
+
+
+    <span sec:authorize="isAuthenticated()">
+        |
+        <a th:href="@{/uzenetek}">Üzenetek</a>
+    </span>
+
+
+    <span sec:authorize="hasRole('ADMIN')">
+        |
+        <a th:href="@{/crud}">CRUD</a>
+    </span>
+
+
+    <span sec:authorize="isAnonymous()">
+        |
+        <a th:href="@{/login}">Login</a>
+
+        |
+        <a th:href="@{/register}">Regisztráció</a>
+    </span>
+
+
+    <span sec:authorize="isAuthenticated()">
+
+        |
+
+        <form th:action="@{/logout}"
+              method="post"
+              style="display:inline">
+
+            <button type="submit">
+                Kijelentkezés
+            </button>
+
+        </form>
+
+    </span>
+
+</nav>
+
 </body>
 </html>
