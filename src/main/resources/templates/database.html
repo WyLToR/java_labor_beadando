@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Adatbázis</title>
+    <title>Mozi adatbázis</title>
 </head>
 
 <body>
@@ -13,11 +13,94 @@
 
 <hr>
 
-<h1>Adatbázis</h1>
+<h1>Mozi adatbázis</h1>
+
+
+<h2>Filmek</h2>
+
+<table border="1">
+
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Cím</th>
+        <th>Év</th>
+        <th>Hossz</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+    <tr th:each="film : ${filmek}">
+        <td th:text="${film.id}"></td>
+        <td th:text="${film.cim}"></td>
+        <td th:text="${film.ev}"></td>
+        <td th:text="${film.hossz}"></td>
+    </tr>
+
+    </tbody>
+
+</table>
+
+
+<h2>Mozik</h2>
+
+<table border="1">
+
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Név</th>
+        <th>Város</th>
+        <th>Férőhely</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+    <tr th:each="mozi : ${mozik}">
+        <td th:text="${mozi.id}"></td>
+        <td th:text="${mozi.nev}"></td>
+        <td th:text="${mozi.varos}"></td>
+        <td th:text="${mozi.ferohely}"></td>
+    </tr>
+
+    </tbody>
+
+</table>
+
+
+<h2>Előadások</h2>
 
 <p>
-    A mozi adatbázis adatai hamarosan itt jelennek meg.
+    Az első 50 rekord jelenik meg.
 </p>
+
+<table border="1">
+
+    <thead>
+    <tr>
+        <th>Film ID</th>
+        <th>Mozi ID</th>
+        <th>Dátum</th>
+        <th>Nézőszám</th>
+        <th>Bevétel</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+    <tr th:each="eloadas : ${eloadasok}">
+        <td th:text="${eloadas.id.filmid}"></td>
+        <td th:text="${eloadas.id.moziid}"></td>
+        <td th:text="${eloadas.id.datum}"></td>
+        <td th:text="${eloadas.nezoszam}"></td>
+        <td th:text="${eloadas.bevetel}"></td>
+    </tr>
+
+    </tbody>
+
+</table>
 
 </body>
 </html>

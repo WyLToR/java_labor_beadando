@@ -11,10 +11,10 @@ public class Controller1 {
         return "home";
     }
 
-    @GetMapping("/adatbazis")
+ /* @GetMapping("/adatbazis")
     public String databasePage() {
         return "database";
-    }
+    }*/
 
     @GetMapping("/kapcsolat")
     public String contactPage() {
