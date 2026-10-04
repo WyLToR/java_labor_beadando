@@ -13,15 +13,49 @@
 <div th:replace="~{menu :: menu}"></div>
 
 <hr>
+
+<h1>Üzenetek</h1>
+
 <p>
     Bejelentkezve:
     <strong sec:authentication="name"></strong>
 </p>
-<h1>Üzenetek</h1>
 
-<p>
-    A mozi adatbázis adatai hamarosan itt jelennek meg.
+<p th:if="${#lists.isEmpty(uzenetek)}">
+    Még nincs elküldött üzenet.
 </p>
+
+<table border="1"
+       th:if="${!#lists.isEmpty(uzenetek)}">
+
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Név</th>
+        <th>E-mail</th>
+        <th>Üzenet</th>
+        <th>Küldés ideje</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+    <tr th:each="uzenet : ${uzenetek}">
+        <td th:text="${uzenet.id}"></td>
+        <td th:text="${uzenet.nev}"></td>
+        <td th:text="${uzenet.email}"></td>
+        <td th:text="${uzenet.uzenet}"></td>
+
+        <td th:text="${#temporals.format(
+                uzenet.kuldesIdeje,
+                'yyyy.MM.dd. HH:mm:ss'
+        )}">
+        </td>
+    </tr>
+
+    </tbody>
+
+</table>
 
 </body>
 </html>

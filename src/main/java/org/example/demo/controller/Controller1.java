@@ -26,11 +26,6 @@ public class Controller1 {
         return "rest";
     }
 
-    @GetMapping("/uzenetek")
-    public String messagesPage() {
-        return "messages";
-    }
-
     @GetMapping("/crud")
     public String crudPage() {
         return "crud";
