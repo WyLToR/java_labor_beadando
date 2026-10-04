@@ -16,8 +16,70 @@
 <h1>Kapcsolat</h1>
 
 <p>
-    A mozi adatbázis adatai hamarosan itt jelennek meg.
+    Ha kérdésed vagy észrevételed van, küldj üzenetet.
 </p>
+
+<p th:if="${siker}"
+   th:text="${siker}"
+   style="color: green;">
+</p>
+
+<form th:action="@{/kapcsolat}"
+      th:object="${kapcsolatForm}"
+      method="post">
+
+    <div>
+        <label for="nev">Név</label><br>
+
+        <input id="nev"
+               type="text"
+               th:field="*{nev}">
+
+        <div th:if="${#fields.hasErrors('nev')}"
+             th:errors="*{nev}"
+             style="color: red;">
+        </div>
+    </div>
+
+    <br>
+
+    <div>
+        <label for="email">E-mail cím</label><br>
+
+        <input id="email"
+               type="email"
+               th:field="*{email}">
+
+        <div th:if="${#fields.hasErrors('email')}"
+             th:errors="*{email}"
+             style="color: red;">
+        </div>
+    </div>
+
+    <br>
+
+    <div>
+        <label for="uzenet">Üzenet</label><br>
+
+        <textarea id="uzenet"
+                  th:field="*{uzenet}"
+                  rows="8"
+                  cols="50">
+        </textarea>
+
+        <div th:if="${#fields.hasErrors('uzenet')}"
+             th:errors="*{uzenet}"
+             style="color: red;">
+        </div>
+    </div>
+
+    <br>
+
+    <button type="submit">
+        Üzenet küldése
+    </button>
+
+</form>
 
 </body>
 </html>

@@ -16,11 +16,6 @@ public class Controller1 {
         return "database";
     }*/
 
-    @GetMapping("/kapcsolat")
-    public String contactPage() {
-        return "contact";
-    }
-
     @GetMapping("/diagram")
     public String diagramPage() {
         return "diagram";
