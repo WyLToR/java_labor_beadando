@@ -5,6 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Diagram</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -13,11 +15,70 @@
 
 <hr>
 
-<h1>Diagram</h1>
+<h1>Mozik bevétele</h1>
 
 <p>
-    A mozi adatbázis adatai hamarosan itt jelennek meg.
+    Az ábra a mozik összesített bevételét mutatja
+    az adatbázisban szereplő előadások alapján.
 </p>
+
+<div style="max-width: 1000px;">
+
+    <canvas id="bevetelDiagram"></canvas>
+
+</div>
+
+<script th:inline="javascript">
+
+    const mozik =
+        /*[[${mozik}]]*/ [];
+
+    const bevetelek =
+        /*[[${bevetelek}]]*/ [];
+
+    const ctx =
+        document.getElementById('bevetelDiagram');
+
+    new Chart(ctx, {
+
+        type: 'bar',
+
+        data: {
+
+            labels: mozik,
+
+            datasets: [{
+                label: 'Összes bevétel',
+                data: bevetelek
+            }]
+        },
+
+        options: {
+
+            responsive: true,
+
+            plugins: {
+
+                legend: {
+                    display: true
+                },
+
+                title: {
+                    display: true,
+                    text: 'Mozik összes bevétele'
+                }
+            },
+
+            scales: {
+
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+</script>
 
 </body>
 </html>

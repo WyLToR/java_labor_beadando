@@ -16,10 +16,10 @@ public class Controller1 {
         return "database";
     }*/
 
-    @GetMapping("/diagram")
+   /* @GetMapping("/diagram")
     public String diagramPage() {
         return "diagram";
-    }
+    } */
 
     @GetMapping("/rest")
     public String restPage() {
