@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="hu"
-      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
-    <title>CRUD</title>
+    <title>Film CRUD</title>
 </head>
 
 <body>
@@ -12,15 +12,72 @@
 <div th:replace="~{menu :: menu}"></div>
 
 <hr>
-<p>
-    Bejelentkezve:
-    <strong sec:authentication="name"></strong>
-</p>
-<h1>CRUD</h1>
+
+<h1>Film CRUD</h1>
 
 <p>
-    A mozi adatbázis adatai hamarosan itt jelennek meg.
+    Ezt az oldalt csak Admin felhasználó érheti el.
 </p>
+
+<p th:if="${uzenet}"
+   th:text="${uzenet}">
+</p>
+
+<p>
+    <a th:href="@{/crud/uj}">
+        Új film hozzáadása
+    </a>
+</p>
+
+<table border="1">
+
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Cím</th>
+        <th>Év</th>
+        <th>Hossz</th>
+        <th>Műveletek</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+    <tr th:each="film : ${filmek}">
+
+        <td th:text="${film.id}"></td>
+
+        <td th:text="${film.cim}"></td>
+
+        <td th:text="${film.ev}"></td>
+
+        <td th:text="${film.hossz}"></td>
+
+        <td>
+
+            <a th:href="@{/crud/modosit/{id}(id=${film.id})}">
+                Módosítás
+            </a>
+
+            |
+
+            <form th:action="@{/crud/torol/{id}(id=${film.id})}"
+                  method="post"
+                  style="display:inline;">
+
+                <button type="submit">
+                    Törlés
+                </button>
+
+            </form>
+
+        </td>
+
+    </tr>
+
+    </tbody>
+
+</table>
 
 </body>
 </html>

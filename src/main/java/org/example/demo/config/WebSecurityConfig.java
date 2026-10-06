@@ -72,7 +72,8 @@ public class WebSecurityConfig {
 
                         .requestMatchers(
                                 "/admin",
-                                "/crud"
+                                "/crud",
+                                "/crud/**"
                         ).hasRole("ADMIN")
 
                         .anyRequest()

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="hu"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title th:text="${modositas}
+        ? 'Film módosítása'
+        : 'Új film'">
+    </title>
+</head>
+
+<body>
+
+<div th:replace="~{menu :: menu}"></div>
+
+<hr>
+
+<h1 th:text="${modositas}
+    ? 'Film módosítása'
+    : 'Új film hozzáadása'">
+</h1>
+
+<form th:object="${film}"
+      th:action="${modositas}
+            ? @{/crud/modosit}
+            : @{/crud/ment}"
+      method="post">
+
+    <div>
+
+        <label for="id">ID</label>
+
+
+        <input id="id"
+               type="number"
+               th:field="*{id}"
+               th:readonly="${modositas}"
+               required>
+
+    </div>
+
+
+
+
+    <div>
+
+        <label for="cim">Cím</label>
+
+
+        <input id="cim"
+               type="text"
+               th:field="*{cim}"
+               required>
+
+    </div>
+
+
+
+
+    <div>
+
+        <label for="ev">Év</label>
+
+
+        <input id="ev"
+               type="number"
+               th:field="*{ev}"
+               required>
+
+    </div>
+
+
+
+
+    <div>
+
+        <label for="hossz">Hossz</label>
+
+
+        <input id="hossz"
+               type="number"
+               th:field="*{hossz}"
+               required>
+
+    </div>
+
+
+
+
+    <button type="submit">
+        Mentés
+    </button>
+
+</form>
+
+<p>
+    <a th:href="@{/crud}">
+        Vissza
+    </a>
+</p>
+
+</body>
+</html>

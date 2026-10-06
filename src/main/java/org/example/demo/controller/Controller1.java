@@ -26,10 +26,10 @@ public class Controller1 {
         return "rest";
     }
 
-    @GetMapping("/crud")
+  /*  @GetMapping("/crud")
     public String crudPage() {
         return "crud";
-    }
+    } */
 
     @GetMapping("/user")
     public String userPage() {
