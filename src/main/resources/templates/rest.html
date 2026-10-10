@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>REST</title>
+    <title>REST API</title>
 </head>
 
 <body>
@@ -13,11 +13,58 @@
 
 <hr>
 
-<h1>REST</h1>
+<h1>Film REST API</h1>
 
 <p>
-    A mozi adatbázis adatai hamarosan itt jelennek meg.
+    A REST API segítségével a film adatbázis rekordjai
+    HTTP kérésekkel kérdezhetők le és módosíthatók.
 </p>
+
+<table border="1">
+
+    <thead>
+    <tr>
+        <th>Metódus</th>
+        <th>Útvonal</th>
+        <th>Funkció</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+    <tr>
+        <td>GET</td>
+        <td>/api/filmek</td>
+        <td>Összes film lekérdezése</td>
+    </tr>
+
+    <tr>
+        <td>GET</td>
+        <td>/api/filmek/{id}</td>
+        <td>Egy film lekérdezése</td>
+    </tr>
+
+    <tr>
+        <td>POST</td>
+        <td>/api/filmek</td>
+        <td>Új film létrehozása</td>
+    </tr>
+
+    <tr>
+        <td>PUT</td>
+        <td>/api/filmek/{id}</td>
+        <td>Film módosítása</td>
+    </tr>
+
+    <tr>
+        <td>DELETE</td>
+        <td>/api/filmek/{id}</td>
+        <td>Film törlése</td>
+    </tr>
+
+    </tbody>
+
+</table>
 
 </body>
 </html>

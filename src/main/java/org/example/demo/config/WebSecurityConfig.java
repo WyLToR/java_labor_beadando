@@ -12,6 +12,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 
 @Configuration
 public class WebSecurityConfig {
+
     private final CustomUserDetailsService userDetailsService;
 
     public WebSecurityConfig(CustomUserDetailsService userDetailsService) {
@@ -25,18 +26,25 @@ public class WebSecurityConfig {
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider(userDetailsService);
+        DaoAuthenticationProvider provider =
+                new DaoAuthenticationProvider(userDetailsService);
+
         provider.setPasswordEncoder(passwordEncoder());
+
         return provider;
     }
 
     @Bean
     public AuthenticationSuccessHandler authenticationSuccessHandler() {
+
         return (request, response, authentication) -> {
+
             boolean isAdmin = authentication
                     .getAuthorities()
                     .stream()
-                    .anyMatch(authority -> authority.getAuthority().equals("ROLE_ADMIN"));
+                    .anyMatch(authority ->
+                            authority.getAuthority().equals("ROLE_ADMIN"));
+
             if (isAdmin) {
                 response.sendRedirect("/admin");
             } else {
@@ -48,9 +56,12 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http)
             throws Exception {
+
         http
                 .authenticationProvider(authenticationProvider())
+
                 .authorizeHttpRequests(auth -> auth
+
                         .requestMatchers(
                                 "/",
                                 "/adatbazis",
@@ -59,10 +70,12 @@ public class WebSecurityConfig {
                                 "/rest",
                                 "/register",
                                 "/login",
+                                "/error",
                                 "/css/**",
                                 "/js/**",
                                 "/images/**",
-                                "/assets/**"
+                                "/assets/**",
+                                "/api/**"
                         ).permitAll()
 
                         .requestMatchers(
@@ -79,28 +92,44 @@ public class WebSecurityConfig {
                         .anyRequest()
                         .authenticated()
                 )
+
+                .csrf(csrf -> csrf
+                        .ignoringRequestMatchers("/api/**")
+                )
+
                 .formLogin(form -> form
                         .loginPage("/login")
                         .successHandler(authenticationSuccessHandler())
                         .permitAll()
                 )
+
                 .logout(logout -> logout
                         .logoutSuccessUrl("/")
                         .permitAll()
                 )
+
                 .exceptionHandling(exception -> exception
+
                         .defaultAuthenticationEntryPointFor(
                                 (request, response, authException) ->
-                                        response.sendRedirect("/login"), request -> request.getRequestURI().equals("/user")
+                                        response.sendRedirect("/login"),
+                                request ->
+                                        request.getRequestURI().equals("/user")
                         )
+
                         .defaultAuthenticationEntryPointFor(
                                 (request, response, authException) ->
-                                        response.sendRedirect("/"), request -> request.getRequestURI().equals("/admin")
+                                        response.sendRedirect("/"),
+                                request ->
+                                        request.getRequestURI().equals("/admin")
                         )
+
                         .accessDeniedHandler(
-                                (request, response, accessDeniedException) -> response.sendRedirect("/")
+                                (request, response, accessDeniedException) ->
+                                        response.sendRedirect("/")
                         )
                 );
+
         return http.build();
     }
 }
