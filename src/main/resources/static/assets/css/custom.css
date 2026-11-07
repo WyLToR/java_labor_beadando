@@ -1,0 +1,316 @@
+/*
+	MoziDB - kiegészítő stílusok a HTML5 UP Verti témához.
+	A main.css után töltődik be, a téma fájljait nem módosítja.
+*/
+
+/* Header + nav: asztali nézetben a menü a logó mellé / alá tördelődik */
+
+	@media screen and (min-width: 981px) {
+
+		#header {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			justify-content: space-between;
+			gap: 0.5em 1em;
+		}
+
+		#nav {
+			position: static;
+		}
+
+			#nav ul {
+				display: flex;
+				flex-wrap: wrap;
+				margin: 0;
+			}
+
+				#nav ul li {
+					float: none;
+					padding-left: 0.25em;
+					line-height: 3.5em;
+				}
+
+	}
+
+	#nav ul li form {
+		display: inline;
+		margin: 0;
+	}
+
+	#nav ul li button {
+		background: none;
+		border: 0;
+		border-radius: 6px;
+		color: #696969;
+		cursor: pointer;
+		font-family: inherit;
+		font-size: 1em;
+		font-weight: 800;
+		letter-spacing: 0.025em;
+		line-height: 1.5;
+		padding: 0.5em 1em;
+		width: auto;
+	}
+
+		#nav ul li button:hover {
+			background: #fff;
+		}
+
+/* Oldalcím */
+
+	.page-header {
+		margin: 0 0 2em 0;
+	}
+
+		.page-header h2 {
+			font-size: 2em;
+			margin: 0 0 0.35em 0;
+		}
+
+		.page-header p {
+			margin: 0;
+		}
+
+	section.box h3 {
+		font-size: 1.35em;
+		margin: 1.5em 0 0.75em 0;
+	}
+
+/* Táblázatok */
+
+	.table-wrapper {
+		-webkit-overflow-scrolling: touch;
+		overflow-x: auto;
+		border: solid 1px #eee;
+		border-radius: 6px;
+		margin: 0 0 2em 0;
+	}
+
+		.table-wrapper table {
+			margin: 0;
+			min-width: 30em;
+		}
+
+		.table-wrapper tbody tr:nth-child(even) {
+			background: #f9f9f9;
+		}
+
+		.table-wrapper.scroll {
+			max-height: 26em;
+			overflow-y: auto;
+		}
+
+			.table-wrapper.scroll thead th {
+				background: #404248;
+				position: sticky;
+				top: 0;
+			}
+
+		.table-wrapper td.actions {
+			white-space: nowrap;
+		}
+
+			.table-wrapper td.actions form {
+				display: inline;
+				margin: 0;
+			}
+
+/* Űrlapok */
+
+	form .field {
+		margin: 0 0 1.5em 0;
+	}
+
+	form label {
+		margin: 0 0 0.5em 0;
+	}
+
+	form input[type="number"] {
+		-webkit-appearance: none;
+		display: block;
+		width: 100%;
+		border-radius: 8px;
+		border: solid 1px #eee;
+		line-height: 3em;
+		padding: 0 1em;
+	}
+
+		form input[type="number"]:focus {
+			border-color: #0090c5;
+		}
+
+	form input[readonly] {
+		background: #f3f3f3;
+		color: #888;
+	}
+
+	.form-narrow {
+		max-width: 32em;
+	}
+
+	.field-error {
+		color: #c0392b;
+		font-size: 0.85em;
+		font-weight: 600;
+		margin: 0.4em 0 0 0;
+	}
+
+/* Kis gombok (táblázatban) */
+
+	input[type="submit"].small,
+	button.small,
+	.button.small {
+		font-size: 0.85em !important;
+		padding: 0.4em 0.9em !important;
+		width: auto !important;
+	}
+
+	button.danger,
+	.button.danger {
+		background: #d9534f;
+	}
+
+		button.danger:hover,
+		.button.danger:hover {
+			background: #e36a66;
+		}
+
+/* Üzenetsávok */
+
+	.alert {
+		border-radius: 6px;
+		font-weight: 600;
+		margin: 0 0 2em 0;
+		padding: 0.9em 1.25em;
+	}
+
+		.alert.success {
+			background: #e6f6ec;
+			color: #1e7a3e;
+		}
+
+		.alert.error {
+			background: #fdecea;
+			color: #b3261e;
+		}
+
+		.alert.info {
+			background: #e8f4fa;
+			color: #0b6a8f;
+		}
+
+/* Főoldal: feature ikonok */
+
+	.box.feature .inner {
+		padding: 3em 2em 3em 2em;
+		text-align: center;
+	}
+
+	.feature-icon {
+		color: #0090c5;
+		display: block;
+		font-size: 3em;
+		margin: 0 0 0.5em 0;
+	}
+
+/* Diagram */
+
+	.chart-scroll {
+		-webkit-overflow-scrolling: touch;
+		overflow-x: auto;
+	}
+
+	.chart-container {
+		margin: 0 auto;
+		max-width: 1000px;
+		min-width: 640px;
+		position: relative;
+		width: 100%;
+	}
+
+		.chart-container canvas {
+			max-width: 100%;
+		}
+
+/* REST dokumentáció */
+
+	code {
+		background: #f3f3f3;
+		border-radius: 4px;
+		font-family: Consolas, "Courier New", monospace;
+		font-size: 0.9em;
+		padding: 0.15em 0.4em;
+	}
+
+	.method {
+		border-radius: 4px;
+		color: #fff;
+		display: inline-block;
+		font-size: 0.8em;
+		font-weight: 800;
+		letter-spacing: 0.05em;
+		min-width: 5em;
+		padding: 0.2em 0.6em;
+		text-align: center;
+	}
+
+		.method.get { background: #2e9e5b; }
+		.method.post { background: #0090c5; }
+		.method.put { background: #e69a1b; }
+		.method.delete { background: #d9534f; }
+
+/* Footer */
+
+	#footer {
+		text-align: center;
+	}
+
+		#footer p {
+			margin: 0 0 0.5em 0;
+		}
+
+/* Mobil */
+
+	@media screen and (max-width: 736px) {
+
+		.box {
+			padding: 1.5em 1.25em;
+		}
+
+		#banner {
+			padding: 3em 1.5em;
+		}
+
+			#banner h2 {
+				font-size: 2.5em;
+			}
+
+			#banner p {
+				font-size: 1.5em;
+			}
+
+			#banner .button.large {
+				font-size: 1.35em;
+			}
+
+		.page-header h2 {
+			font-size: 1.6em;
+		}
+
+		#main-wrapper {
+			padding: 2.5em 0;
+		}
+
+	}
+
+/* Főoldal: a banner gombjai egy sorban maradjanak */
+
+	@media screen and (min-width: 981px) {
+
+		#banner .button.large {
+			font-size: 1.6em;
+			padding: 1em 2.5em 1em 1.1em;
+		}
+
+	}

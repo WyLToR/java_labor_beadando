@@ -1,70 +1,90 @@
-<!DOCTYPE html>
-<html lang="hu"
-      xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<html
+  lang="hu"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head th:replace="~{head :: head('MoziDB - REST API')}"></head>
 
-<head>
-    <meta charset="UTF-8">
-    <title>REST API</title>
-</head>
+  <body class="is-preload">
+    <div id="page-wrapper">
+      <div id="header-wrapper">
+        <div th:replace="~{menu :: menu}"></div>
+      </div>
 
-<body>
+      <div id="main-wrapper">
+        <div class="container">
+          <section class="box last">
+            <header class="page-header">
+              <h2>Film REST API</h2>
 
-<div th:replace="~{menu :: menu}"></div>
+              <p>
+                A REST API segítségével a film adatbázis rekordjai HTTP
+                kérésekkel kérdezhetők le és módosíthatók.
+              </p>
+            </header>
 
-<hr>
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Metódus</th>
+                    <th>Útvonal</th>
+                    <th>Funkció</th>
+                  </tr>
+                </thead>
 
-<h1>Film REST API</h1>
+                <tbody>
+                  <tr>
+                    <td><span class="method get">GET</span></td>
+                    <td><code>/api/filmek</code></td>
+                    <td>Összes film lekérdezése</td>
+                  </tr>
 
-<p>
-    A REST API segítségével a film adatbázis rekordjai
-    HTTP kérésekkel kérdezhetők le és módosíthatók.
-</p>
+                  <tr>
+                    <td><span class="method get">GET</span></td>
+                    <td><code>/api/filmek/{id}</code></td>
+                    <td>Egy film lekérdezése</td>
+                  </tr>
 
-<table border="1">
+                  <tr>
+                    <td><span class="method post">POST</span></td>
+                    <td><code>/api/filmek</code></td>
+                    <td>Új film létrehozása</td>
+                  </tr>
 
-    <thead>
-    <tr>
-        <th>Metódus</th>
-        <th>Útvonal</th>
-        <th>Funkció</th>
-    </tr>
-    </thead>
+                  <tr>
+                    <td><span class="method put">PUT</span></td>
+                    <td><code>/api/filmek/{id}</code></td>
+                    <td>Film módosítása</td>
+                  </tr>
 
-    <tbody>
+                  <tr>
+                    <td><span class="method delete">DELETE</span></td>
+                    <td><code>/api/filmek/{id}</code></td>
+                    <td>Film törlése</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
 
-    <tr>
-        <td>GET</td>
-        <td>/api/filmek</td>
-        <td>Összes film lekérdezése</td>
-    </tr>
+            <p>
+              A válaszok JSON formátumúak, az API bejelentkezés nélkül
+              használható.
+            </p>
 
-    <tr>
-        <td>GET</td>
-        <td>/api/filmek/{id}</td>
-        <td>Egy film lekérdezése</td>
-    </tr>
+            <a
+              th:href="@{/api/filmek}"
+              class="button icon solid fa-code"
+            >
+              Filmek lekérdezése JSON-ban
+            </a>
+          </section>
+        </div>
+      </div>
 
-    <tr>
-        <td>POST</td>
-        <td>/api/filmek</td>
-        <td>Új film létrehozása</td>
-    </tr>
+      <div th:replace="~{footer :: footer}"></div>
+    </div>
 
-    <tr>
-        <td>PUT</td>
-        <td>/api/filmek/{id}</td>
-        <td>Film módosítása</td>
-    </tr>
-
-    <tr>
-        <td>DELETE</td>
-        <td>/api/filmek/{id}</td>
-        <td>Film törlése</td>
-    </tr>
-
-    </tbody>
-
-</table>
-
-</body>
+    <div th:replace="~{scripts :: scripts}"></div>
+  </body>
 </html>

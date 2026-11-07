@@ -1,84 +1,94 @@
-<!DOCTYPE html>
-<html lang="hu"
-      xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<html
+  lang="hu"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head th:replace="~{head :: head('MoziDB - Diagram')}"></head>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Diagram</title>
+  <body class="is-preload">
+    <div id="page-wrapper">
+      <div id="header-wrapper">
+        <div th:replace="~{menu :: menu}"></div>
+      </div>
+
+      <div id="main-wrapper">
+        <div class="container">
+          <section class="box last">
+            <header class="page-header">
+              <h2>Mozik bevétele</h2>
+
+              <p>
+                Az ábra a mozik összesített bevételét mutatja az adatbázisban
+                szereplő előadások alapján.
+              </p>
+            </header>
+
+            <div class="chart-scroll">
+              <div class="chart-container">
+                <canvas id="bevetelDiagram"></canvas>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div th:replace="~{footer :: footer}"></div>
+    </div>
+
+    <div th:replace="~{scripts :: scripts}"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
 
-<body>
+    <script th:inline="javascript">
 
-<div th:replace="~{menu :: menu}"></div>
+      const mozik =
+          /*[[${mozik}]]*/ [];
 
-<hr>
+      const bevetelek =
+          /*[[${bevetelek}]]*/ [];
 
-<h1>Mozik bevétele</h1>
+      const ctx =
+          document.getElementById('bevetelDiagram');
 
-<p>
-    Az ábra a mozik összesített bevételét mutatja
-    az adatbázisban szereplő előadások alapján.
-</p>
+      new Chart(ctx, {
 
-<div style="max-width: 1000px;">
+          type: 'bar',
 
-    <canvas id="bevetelDiagram"></canvas>
+          data: {
 
-</div>
+              labels: mozik,
 
-<script th:inline="javascript">
+              datasets: [{
+                  label: 'Összes bevétel',
+                  data: bevetelek
+              }]
+          },
 
-    const mozik =
-        /*[[${mozik}]]*/ [];
+          options: {
 
-    const bevetelek =
-        /*[[${bevetelek}]]*/ [];
+              responsive: true,
 
-    const ctx =
-        document.getElementById('bevetelDiagram');
+              plugins: {
 
-    new Chart(ctx, {
+                  legend: {
+                      display: true
+                  },
 
-        type: 'bar',
+                  title: {
+                      display: true,
+                      text: 'Mozik összes bevétele'
+                  }
+              },
 
-        data: {
+              scales: {
 
-            labels: mozik,
+                  y: {
+                      beginAtZero: true
+                  }
+              }
+          }
+      });
 
-            datasets: [{
-                label: 'Összes bevétel',
-                data: bevetelek
-            }]
-        },
-
-        options: {
-
-            responsive: true,
-
-            plugins: {
-
-                legend: {
-                    display: true
-                },
-
-                title: {
-                    display: true,
-                    text: 'Mozik összes bevétele'
-                }
-            },
-
-            scales: {
-
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-
-</script>
-
-</body>
+    </script>
+  </body>
 </html>

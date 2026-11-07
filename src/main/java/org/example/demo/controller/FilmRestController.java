@@ -3,7 +3,10 @@ package org.example.demo.controller;
 import org.example.demo.entity.Film;
 import org.example.demo.repository.EloadasRepository;
 import org.example.demo.repository.FilmRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -37,6 +40,12 @@ public class FilmRestController {
 
     @PostMapping
     public Film ujFilm(@RequestBody Film film) {
+        if (film.getId() == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "A film ID megadása kötelező.");
+        }
+        if (filmRepository.existsById(film.getId())) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Már létezik film ezzel az ID-val.");
+        }
         return filmRepository.save(film);
     }
 
@@ -65,6 +74,7 @@ public class FilmRestController {
     }
 
     @DeleteMapping("/{id}")
+    @Transactional
     public void filmTorlese(@PathVariable Integer id) {
 
         if (!filmRepository.existsById(id)) {

@@ -1,105 +1,106 @@
-<!DOCTYPE html>
-<html lang="hu"
-      xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<html
+  lang="hu"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head
+    th:replace="~{head :: head(${modositas}
+        ? 'MoziDB - Film módosítása'
+        : 'MoziDB - Új film')}"
+  ></head>
 
-<head>
-    <meta charset="UTF-8">
+  <body class="is-preload">
+    <div id="page-wrapper">
+      <div id="header-wrapper">
+        <div th:replace="~{menu :: menu}"></div>
+      </div>
 
-    <title th:text="${modositas}
-        ? 'Film módosítása'
-        : 'Új film'">
-    </title>
-</head>
+      <div id="main-wrapper">
+        <div class="container">
+          <section class="box last">
+            <header class="page-header">
+              <h2
+                th:text="${modositas}
+                    ? 'Film módosítása'
+                    : 'Új film hozzáadása'"
+              ></h2>
+            </header>
 
-<body>
+            <form
+              class="form-narrow"
+              th:object="${film}"
+              th:action="${modositas}
+                    ? @{/crud/modosit}
+                    : @{/crud/ment}"
+              method="post"
+            >
+              <div class="field">
+                <label for="id">ID</label>
 
-<div th:replace="~{menu :: menu}"></div>
+                <input
+                  id="id"
+                  type="number"
+                  th:field="*{id}"
+                  th:readonly="${modositas}"
+                  required
+                />
+              </div>
 
-<hr>
+              <div class="field">
+                <label for="cim">Cím</label>
 
-<h1 th:text="${modositas}
-    ? 'Film módosítása'
-    : 'Új film hozzáadása'">
-</h1>
+                <input
+                  id="cim"
+                  type="text"
+                  th:field="*{cim}"
+                  required
+                />
+              </div>
 
-<form th:object="${film}"
-      th:action="${modositas}
-            ? @{/crud/modosit}
-            : @{/crud/ment}"
-      method="post">
+              <div class="field">
+                <label for="ev">Év</label>
 
-    <div>
+                <input
+                  id="ev"
+                  type="number"
+                  th:field="*{ev}"
+                  required
+                />
+              </div>
 
-        <label for="id">ID</label>
+              <div class="field">
+                <label for="hossz">Hossz</label>
 
+                <input
+                  id="hossz"
+                  type="number"
+                  th:field="*{hossz}"
+                  required
+                />
+              </div>
 
-        <input id="id"
-               type="number"
-               th:field="*{id}"
-               th:readonly="${modositas}"
-               required>
+              <ul class="actions">
+                <li>
+                  <button type="submit">Mentés</button>
+                </li>
 
+                <li>
+                  <a
+                    th:href="@{/crud}"
+                    class="button alt"
+                  >
+                    Vissza
+                  </a>
+                </li>
+              </ul>
+            </form>
+          </section>
+        </div>
+      </div>
+
+      <div th:replace="~{footer :: footer}"></div>
     </div>
 
-
-
-
-    <div>
-
-        <label for="cim">Cím</label>
-
-
-        <input id="cim"
-               type="text"
-               th:field="*{cim}"
-               required>
-
-    </div>
-
-
-
-
-    <div>
-
-        <label for="ev">Év</label>
-
-
-        <input id="ev"
-               type="number"
-               th:field="*{ev}"
-               required>
-
-    </div>
-
-
-
-
-    <div>
-
-        <label for="hossz">Hossz</label>
-
-
-        <input id="hossz"
-               type="number"
-               th:field="*{hossz}"
-               required>
-
-    </div>
-
-
-
-
-    <button type="submit">
-        Mentés
-    </button>
-
-</form>
-
-<p>
-    <a th:href="@{/crud}">
-        Vissza
-    </a>
-</p>
-
-</body>
+    <div th:replace="~{scripts :: scripts}"></div>
+  </body>
 </html>

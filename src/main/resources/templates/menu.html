@@ -1,64 +1,71 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<!doctype html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+  <body>
+    <header
+      id="header"
+      class="container"
+      th:fragment="menu"
+    >
+      <div id="logo">
+        <h1>
+          <a th:href="@{/}">MoziDB</a>
+        </h1>
 
-<body>
+        <span>Java Spring Boot</span>
+      </div>
 
-<nav th:fragment="menu">
+      <nav id="nav">
+        <ul>
+          <li>
+            <a th:href="@{/}">Főoldal</a>
+          </li>
 
-    <a th:href="@{/}">Főoldal</a>
+          <li>
+            <a th:href="@{/adatbazis}">Adatbázis</a>
+          </li>
 
-    |
-    <a th:href="@{/adatbazis}">Adatbázis</a>
+          <li>
+            <a th:href="@{/kapcsolat}">Kapcsolat</a>
+          </li>
 
-    |
-    <a th:href="@{/kapcsolat}">Kapcsolat</a>
+          <li>
+            <a th:href="@{/diagram}">Diagram</a>
+          </li>
 
-    |
-    <a th:href="@{/diagram}">Diagram</a>
+          <li>
+            <a th:href="@{/rest}">REST</a>
+          </li>
 
-    |
-    <a th:href="@{/rest}">REST</a>
+          <li sec:authorize="isAuthenticated()">
+            <a th:href="@{/uzenetek}">Üzenetek</a>
+          </li>
 
+          <li sec:authorize="hasRole('ADMIN')">
+            <a th:href="@{/crud}">CRUD</a>
+          </li>
 
-    <span sec:authorize="isAuthenticated()">
-        |
-        <a th:href="@{/uzenetek}">Üzenetek</a>
-    </span>
+          <li sec:authorize="isAnonymous()">
+            <a th:href="@{/login}">Bejelentkezés</a>
+          </li>
 
+          <li sec:authorize="isAnonymous()">
+            <a th:href="@{/register}">Regisztráció</a>
+          </li>
 
-    <span sec:authorize="hasRole('ADMIN')">
-        |
-        <a th:href="@{/crud}">CRUD</a>
-    </span>
-
-
-    <span sec:authorize="isAnonymous()">
-        |
-        <a th:href="@{/login}">Login</a>
-
-        |
-        <a th:href="@{/register}">Regisztráció</a>
-    </span>
-
-
-    <span sec:authorize="isAuthenticated()">
-
-        |
-
-        <form th:action="@{/logout}"
+          <li sec:authorize="isAuthenticated()">
+            <form
+              id="logout-form"
+              th:action="@{/logout}"
               method="post"
-              style="display:inline">
-
-            <button type="submit">
-                Kijelentkezés
-            </button>
-
-        </form>
-
-    </span>
-
-</nav>
-
-</body>
+            >
+              <button type="submit">Kijelentkezés</button>
+            </form>
+          </li>
+        </ul>
+      </nav>
+    </header>
+  </body>
 </html>

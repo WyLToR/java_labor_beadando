@@ -1,0 +1,48 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <body>
+    <div th:fragment="scripts">
+      <script th:src="@{/assets/js/jquery.min.js}"></script>
+      <script th:src="@{/assets/js/jquery.dropotron.min.js}"></script>
+      <script th:src="@{/assets/js/browser.min.js}"></script>
+      <script th:src="@{/assets/js/breakpoints.min.js}"></script>
+      <script th:src="@{/assets/js/util.js}"></script>
+      <script th:src="@{/assets/js/main.js}"></script>
+
+      <script>
+        (function () {
+          // Az aktuális oldal menüpontjának kiemelése.
+          var path = window.location.pathname;
+
+          document.querySelectorAll('#nav > ul > li > a').forEach(function (a) {
+            var href = a.getAttribute('href');
+
+            if (href === path || (href !== '/' && path.indexOf(href + '/') === 0)) {
+              a.parentNode.classList.add('current');
+            }
+          });
+
+          // A mobil menü csak linkeket vesz át, ezért a kijelentkezés
+          // külön kerül bele, és ugyanazt a POST formot küldi el.
+          var logoutForm = document.getElementById('logout-form');
+          var panelNav = document.querySelector('#navPanel nav');
+
+          if (logoutForm && panelNav) {
+            var link = document.createElement('a');
+
+            link.className = 'link depth-0';
+            link.href = '#';
+            link.textContent = 'Kijelentkezés';
+
+            link.addEventListener('click', function (event) {
+              event.preventDefault();
+              logoutForm.submit();
+            });
+
+            panelNav.appendChild(link);
+          }
+        })();
+      </script>
+    </div>
+  </body>
+</html>

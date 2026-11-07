@@ -4,6 +4,7 @@ import org.example.demo.entity.Film;
 import org.example.demo.repository.EloadasRepository;
 import org.example.demo.repository.FilmRepository;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -86,7 +87,7 @@ public class CrudController {
 
         Film film = filmRepository
                 .findById(id)
-                .orElseThrow();
+                .orElseThrow(() -> new FilmNotFoundException(id));
 
         model.addAttribute(
                 "film",
@@ -107,6 +108,9 @@ public class CrudController {
             RedirectAttributes redirectAttributes
     ) {
 
+        if (!filmRepository.existsById(film.getId())) {
+            throw new FilmNotFoundException(film.getId());
+        }
         filmRepository.save(film);
 
         redirectAttributes.addFlashAttribute(
@@ -118,6 +122,7 @@ public class CrudController {
     }
 
     @PostMapping("/crud/torol/{id}")
+    @Transactional
     public String filmTorlese(
             @PathVariable Integer id,
             RedirectAttributes redirectAttributes

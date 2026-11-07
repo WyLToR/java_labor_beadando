@@ -1,85 +1,103 @@
-<!DOCTYPE html>
-<html lang="hu"
-      xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<html
+  lang="hu"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head th:replace="~{head :: head('MoziDB - Kapcsolat')}"></head>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Kapcsolat</title>
-</head>
+  <body class="is-preload">
+    <div id="page-wrapper">
+      <div id="header-wrapper">
+        <div th:replace="~{menu :: menu}"></div>
+      </div>
 
-<body>
+      <div id="main-wrapper">
+        <div class="container">
+          <section class="box last">
+            <header class="page-header">
+              <h2>Kapcsolat</h2>
 
-<div th:replace="~{menu :: menu}"></div>
+              <p>Ha kérdésed vagy észrevételed van, küldj üzenetet.</p>
+            </header>
 
-<hr>
+            <p
+              class="alert success"
+              th:if="${siker}"
+              th:text="${siker}"
+            ></p>
 
-<h1>Kapcsolat</h1>
+            <form
+              th:action="@{/kapcsolat}"
+              th:object="${kapcsolatForm}"
+              method="post"
+            >
+              <div class="row gtr-50">
+                <div class="col-6 col-12-small">
+                  <div class="field">
+                    <label for="nev">Név</label>
 
-<p>
-    Ha kérdésed vagy észrevételed van, küldj üzenetet.
-</p>
+                    <input
+                      id="nev"
+                      type="text"
+                      th:field="*{nev}"
+                    />
 
-<p th:if="${siker}"
-   th:text="${siker}"
-   style="color: green;">
-</p>
+                    <div
+                      class="field-error"
+                      th:if="${#fields.hasErrors('nev')}"
+                      th:errors="*{nev}"
+                    ></div>
+                  </div>
+                </div>
 
-<form th:action="@{/kapcsolat}"
-      th:object="${kapcsolatForm}"
-      method="post">
+                <div class="col-6 col-12-small">
+                  <div class="field">
+                    <label for="email">E-mail cím</label>
 
-    <div>
-        <label for="nev">Név</label><br>
+                    <input
+                      id="email"
+                      type="email"
+                      th:field="*{email}"
+                    />
 
-        <input id="nev"
-               type="text"
-               th:field="*{nev}">
+                    <div
+                      class="field-error"
+                      th:if="${#fields.hasErrors('email')}"
+                      th:errors="*{email}"
+                    ></div>
+                  </div>
+                </div>
 
-        <div th:if="${#fields.hasErrors('nev')}"
-             th:errors="*{nev}"
-             style="color: red;">
+                <div class="col-12">
+                  <div class="field">
+                    <label for="uzenet">Üzenet</label>
+
+                    <textarea
+                      id="uzenet"
+                      th:field="*{uzenet}"
+                      rows="8"
+                    ></textarea>
+
+                    <div
+                      class="field-error"
+                      th:if="${#fields.hasErrors('uzenet')}"
+                      th:errors="*{uzenet}"
+                    ></div>
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <button type="submit">Üzenet küldése</button>
+                </div>
+              </div>
+            </form>
+          </section>
         </div>
+      </div>
+
+      <div th:replace="~{footer :: footer}"></div>
     </div>
 
-    <br>
-
-    <div>
-        <label for="email">E-mail cím</label><br>
-
-        <input id="email"
-               type="email"
-               th:field="*{email}">
-
-        <div th:if="${#fields.hasErrors('email')}"
-             th:errors="*{email}"
-             style="color: red;">
-        </div>
-    </div>
-
-    <br>
-
-    <div>
-        <label for="uzenet">Üzenet</label><br>
-
-        <textarea id="uzenet"
-                  th:field="*{uzenet}"
-                  rows="8"
-                  cols="50">
-        </textarea>
-
-        <div th:if="${#fields.hasErrors('uzenet')}"
-             th:errors="*{uzenet}"
-             style="color: red;">
-        </div>
-    </div>
-
-    <br>
-
-    <button type="submit">
-        Üzenet küldése
-    </button>
-
-</form>
-
-</body>
+    <div th:replace="~{scripts :: scripts}"></div>
+  </body>
 </html>

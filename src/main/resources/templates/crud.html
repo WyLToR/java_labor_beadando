@@ -1,83 +1,93 @@
-<!DOCTYPE html>
-<html lang="hu"
-      xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<html
+  lang="hu"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head th:replace="~{head :: head('MoziDB - Film CRUD')}"></head>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Film CRUD</title>
-</head>
+  <body class="is-preload">
+    <div id="page-wrapper">
+      <div id="header-wrapper">
+        <div th:replace="~{menu :: menu}"></div>
+      </div>
 
-<body>
+      <div id="main-wrapper">
+        <div class="container">
+          <section class="box last">
+            <header class="page-header">
+              <h2>Film CRUD</h2>
 
-<div th:replace="~{menu :: menu}"></div>
+              <p>Ezt az oldalt csak Admin felhasználó érheti el.</p>
+            </header>
 
-<hr>
+            <p
+              class="alert success"
+              th:if="${uzenet}"
+              th:text="${uzenet}"
+            ></p>
 
-<h1>Film CRUD</h1>
+            <p>
+              <a
+                th:href="@{/crud/uj}"
+                class="button icon solid fa-plus"
+              >
+                Új film hozzáadása
+              </a>
+            </p>
 
-<p>
-    Ezt az oldalt csak Admin felhasználó érheti el.
-</p>
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Cím</th>
+                    <th>Év</th>
+                    <th>Hossz</th>
+                    <th>Műveletek</th>
+                  </tr>
+                </thead>
 
-<p th:if="${uzenet}"
-   th:text="${uzenet}">
-</p>
+                <tbody>
+                  <tr th:each="film : ${filmek}">
+                    <td th:text="${film.id}"></td>
 
-<p>
-    <a th:href="@{/crud/uj}">
-        Új film hozzáadása
-    </a>
-</p>
+                    <td th:text="${film.cim}"></td>
 
-<table border="1">
+                    <td th:text="${film.ev}"></td>
 
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Cím</th>
-        <th>Év</th>
-        <th>Hossz</th>
-        <th>Műveletek</th>
-    </tr>
-    </thead>
+                    <td th:text="${film.hossz}"></td>
 
-    <tbody>
+                    <td class="actions">
+                      <a
+                        th:href="@{/crud/modosit/{id}(id=${film.id})}"
+                        class="button small alt"
+                      >
+                        Módosítás
+                      </a>
 
-    <tr th:each="film : ${filmek}">
+                      <form
+                        th:action="@{/crud/torol/{id}(id=${film.id})}"
+                        method="post"
+                      >
+                        <button
+                          type="submit"
+                          class="small danger"
+                        >
+                          Törlés
+                        </button>
+                      </form>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </div>
 
-        <td th:text="${film.id}"></td>
+      <div th:replace="~{footer :: footer}"></div>
+    </div>
 
-        <td th:text="${film.cim}"></td>
-
-        <td th:text="${film.ev}"></td>
-
-        <td th:text="${film.hossz}"></td>
-
-        <td>
-
-            <a th:href="@{/crud/modosit/{id}(id=${film.id})}">
-                Módosítás
-            </a>
-
-            |
-
-            <form th:action="@{/crud/torol/{id}(id=${film.id})}"
-                  method="post"
-                  style="display:inline;">
-
-                <button type="submit">
-                    Törlés
-                </button>
-
-            </form>
-
-        </td>
-
-    </tr>
-
-    </tbody>
-
-</table>
-
-</body>
+    <div th:replace="~{scripts :: scripts}"></div>
+  </body>
 </html>

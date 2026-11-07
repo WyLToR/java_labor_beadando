@@ -1,20 +1,134 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-    <meta charset="UTF-8">
-    <title>Home</title>
-</head>
-<body>
-    <div th:replace="~{menu :: menu}"></div>
-    <hr>
-    <h1>Mozi adatbázis</h1>
+<!doctype html>
+<html
+  lang="hu"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+  <head th:replace="~{head :: head('MoziDB - Főoldal')}"></head>
 
-    <p>
-        Filmek, mozik és előadások adatainak megjelenítése
-        Spring Boot alkalmazásban.
-    </p>
-    <div sec:authorize="isAuthenticated()">
-        <p>Logged in user:<strong sec:authentication="name"></strong></p>
+  <body class="is-preload homepage">
+    <div id="page-wrapper">
+      <div id="header-wrapper">
+        <div th:replace="~{menu :: menu}"></div>
+      </div>
+
+      <div id="banner-wrapper">
+        <div
+          id="banner"
+          class="box container"
+        >
+          <div class="row">
+            <div class="col-7 col-12-medium">
+              <h2>MoziDB</h2>
+
+              <p>Filmek, mozik és előadások egy helyen.</p>
+            </div>
+
+            <div class="col-5 col-12-medium">
+              <ul>
+                <li>
+                  <a
+                    th:href="@{/adatbazis}"
+                    class="button large icon solid fa-arrow-circle-right"
+                  >
+                    Adatbázis megnyitása
+                  </a>
+                </li>
+
+                <li>
+                  <a
+                    th:href="@{/diagram}"
+                    class="button alt large icon solid fa-chart-bar"
+                  >
+                    Statisztikák
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="features-wrapper">
+        <div class="container">
+          <div class="row">
+            <div class="col-4 col-12-medium">
+              <section class="box feature">
+                <div class="inner">
+                  <span class="feature-icon icon solid fa-film"></span>
+
+                  <header>
+                    <h2>Filmek</h2>
+                  </header>
+
+                  <p>Filmcímek, megjelenési évek és játékidők adatbázisa.</p>
+                </div>
+              </section>
+            </div>
+
+            <div class="col-4 col-12-medium">
+              <section class="box feature">
+                <div class="inner">
+                  <span class="feature-icon icon solid fa-building"></span>
+
+                  <header>
+                    <h2>Mozik</h2>
+                  </header>
+
+                  <p>Mozik, városok és befogadóképességi adatok.</p>
+                </div>
+              </section>
+            </div>
+
+            <div class="col-4 col-12-medium">
+              <section class="box feature">
+                <div class="inner">
+                  <span class="feature-icon icon solid fa-ticket-alt"></span>
+
+                  <header>
+                    <h2>Előadások</h2>
+                  </header>
+
+                  <p>Nézőszámok, bevételek és vetítési statisztikák.</p>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="main-wrapper">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <section class="box last">
+                <h2>Az alkalmazásról</h2>
+
+                <p>
+                  A MoziDB egy Java Spring Boot alapú szerveroldali
+                  webalkalmazás, amely MySQL adatbázisból jelenít meg film-,
+                  mozi- és előadásadatokat.
+                </p>
+
+                <p>
+                  A rendszer autentikációt, szerepkör-alapú jogosultságkezelést,
+                  CRUD műveleteket, diagramot és REST API-t tartalmaz.
+                </p>
+
+                <p sec:authorize="isAuthenticated()">
+                  Bejelentkezett felhasználó:
+
+                  <strong sec:authentication="name"></strong>
+                </p>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div th:replace="~{footer :: footer}"></div>
     </div>
-</body>
+
+    <div th:replace="~{scripts :: scripts}"></div>
+  </body>
 </html>

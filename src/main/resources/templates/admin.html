@@ -1,14 +1,20 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-  <meta charset="UTF-8">
-  <title>Admin</title>
-</head>
-<body>
-  <div th:replace="~{menu :: menu}"></div>
-  <hr>
-  <h1>Admin page</h1>
-  <p>This page can only be seen by ADMIN.</p>
-  <p>Admin:<strong sec:authentication="name"></strong></p>
-</body>
+<!doctype html>
+<html lang="hu" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+  <head th:replace="~{head :: head('MoziDB - Admin')}"></head>
+  <body class="is-preload">
+    <div id="page-wrapper">
+      <div id="header-wrapper"><div th:replace="~{menu :: menu}"></div></div>
+      <div id="main-wrapper">
+        <div class="container">
+          <section class="box last">
+            <header class="page-header"><h2>Admin</h2></header>
+            <p>Ezt az oldalt csak ADMIN felhasználó érheti el.</p>
+            <p>Bejelentkezve: <strong sec:authentication="name"></strong></p>
+          </section>
+        </div>
+      </div>
+      <div th:replace="~{footer :: footer}"></div>
+    </div>
+    <div th:replace="~{scripts :: scripts}"></div>
+  </body>
 </html>

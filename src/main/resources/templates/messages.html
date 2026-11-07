@@ -1,61 +1,75 @@
-<!DOCTYPE html>
-<html lang="hu"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<!doctype html>
+<html
+  lang="hu"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+  <head th:replace="~{head :: head('MoziDB - Üzenetek')}"></head>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Üzenetek</title>
-</head>
+  <body class="is-preload">
+    <div id="page-wrapper">
+      <div id="header-wrapper">
+        <div th:replace="~{menu :: menu}"></div>
+      </div>
 
-<body>
+      <div id="main-wrapper">
+        <div class="container">
+          <section class="box last">
+            <header class="page-header">
+              <h2>Üzenetek</h2>
 
-<div th:replace="~{menu :: menu}"></div>
+              <p>
+                Bejelentkezve:
+                <strong sec:authentication="name"></strong>
+              </p>
+            </header>
 
-<hr>
+            <p
+              class="alert info"
+              th:if="${#lists.isEmpty(uzenetek)}"
+            >
+              Még nincs elküldött üzenet.
+            </p>
 
-<h1>Üzenetek</h1>
+            <div
+              class="table-wrapper"
+              th:if="${!#lists.isEmpty(uzenetek)}"
+            >
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Név</th>
+                    <th>E-mail</th>
+                    <th>Üzenet</th>
+                    <th>Küldés ideje</th>
+                  </tr>
+                </thead>
 
-<p>
-    Bejelentkezve:
-    <strong sec:authentication="name"></strong>
-</p>
+                <tbody>
+                  <tr th:each="uzenet : ${uzenetek}">
+                    <td th:text="${uzenet.id}"></td>
+                    <td th:text="${uzenet.nev}"></td>
+                    <td th:text="${uzenet.email}"></td>
+                    <td th:text="${uzenet.uzenet}"></td>
 
-<p th:if="${#lists.isEmpty(uzenetek)}">
-    Még nincs elküldött üzenet.
-</p>
+                    <td
+                      th:text="${#temporals.format(
+                              uzenet.kuldesIdeje,
+                              'yyyy.MM.dd. HH:mm:ss'
+                      )}"
+                    ></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </div>
 
-<table border="1"
-       th:if="${!#lists.isEmpty(uzenetek)}">
+      <div th:replace="~{footer :: footer}"></div>
+    </div>
 
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Név</th>
-        <th>E-mail</th>
-        <th>Üzenet</th>
-        <th>Küldés ideje</th>
-    </tr>
-    </thead>
-
-    <tbody>
-
-    <tr th:each="uzenet : ${uzenetek}">
-        <td th:text="${uzenet.id}"></td>
-        <td th:text="${uzenet.nev}"></td>
-        <td th:text="${uzenet.email}"></td>
-        <td th:text="${uzenet.uzenet}"></td>
-
-        <td th:text="${#temporals.format(
-                uzenet.kuldesIdeje,
-                'yyyy.MM.dd. HH:mm:ss'
-        )}">
-        </td>
-    </tr>
-
-    </tbody>
-
-</table>
-
-</body>
+    <div th:replace="~{scripts :: scripts}"></div>
+  </body>
 </html>

@@ -1,14 +1,20 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-    <meta charset="UTF-8">
-    <title>User</title>
-</head>
-<body>
-    <div th:replace="~{menu :: menu}"></div>
-    <hr>
-    <h1>User page</h1>
-    <p>This page can be seen by logged in users.</p>
-    <p>Logged in:<strong sec:authentication="name"></strong></p>
-</body>
+<!doctype html>
+<html lang="hu" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+  <head th:replace="~{head :: head('MoziDB - Felhasználó')}"></head>
+  <body class="is-preload">
+    <div id="page-wrapper">
+      <div id="header-wrapper"><div th:replace="~{menu :: menu}"></div></div>
+      <div id="main-wrapper">
+        <div class="container">
+          <section class="box last">
+            <header class="page-header"><h2>Felhasználó</h2></header>
+            <p>Ez az oldal bejelentkezett felhasználók számára elérhető.</p>
+            <p>Bejelentkezve: <strong sec:authentication="name"></strong></p>
+          </section>
+        </div>
+      </div>
+      <div th:replace="~{footer :: footer}"></div>
+    </div>
+    <div th:replace="~{scripts :: scripts}"></div>
+  </body>
 </html>

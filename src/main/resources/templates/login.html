@@ -1,19 +1,76 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <title>Login</title>
-</head>
-<body>
-  <div th:replace="~{menu :: menu}"></div>
-  <hr>
-  <h1>Login</h1>
-  <div th:if="${param.registered}" style="color: green;">Successful registration! You can log in.</div>
-  <div th:if="${param.error}" style="color: red;">Incorrect username or password!</div>
-  <form th:action="@{/login}" method="post">
-    <label>Username:</label><input type="text" name="username"><br>
-    <label>Password:</label><input type="password" name="password"><br>
-    <button type="submit">Login</button>
-  </form>
-</body>
+<!doctype html>
+<html
+  lang="hu"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head th:replace="~{head :: head('MoziDB - Bejelentkezés')}"></head>
+
+  <body class="is-preload">
+    <div id="page-wrapper">
+      <div id="header-wrapper">
+        <div th:replace="~{menu :: menu}"></div>
+      </div>
+
+      <div id="main-wrapper">
+        <div class="container">
+          <section class="box last">
+            <header class="page-header">
+              <h2>Bejelentkezés</h2>
+            </header>
+
+            <div
+              class="alert success form-narrow"
+              th:if="${param.registered}"
+            >
+              Sikeres regisztráció! Most már bejelentkezhetsz.
+            </div>
+
+            <div
+              class="alert error form-narrow"
+              th:if="${param.error}"
+            >
+              Hibás felhasználónév vagy jelszó!
+            </div>
+
+            <form
+              class="form-narrow"
+              th:action="@{/login}"
+              method="post"
+            >
+              <div class="field">
+                <label for="username">Felhasználónév</label>
+
+                <input
+                  id="username"
+                  type="text"
+                  name="username"
+                />
+              </div>
+
+              <div class="field">
+                <label for="password">Jelszó</label>
+
+                <input
+                  id="password"
+                  type="password"
+                  name="password"
+                />
+              </div>
+
+              <button type="submit">Bejelentkezés</button>
+            </form>
+
+            <p style="margin-top: 2em">
+              Még nincs fiókod?
+              <a th:href="@{/register}">Regisztráció</a>
+            </p>
+          </section>
+        </div>
+      </div>
+
+      <div th:replace="~{footer :: footer}"></div>
+    </div>
+
+    <div th:replace="~{scripts :: scripts}"></div>
+  </body>
 </html>
