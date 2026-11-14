@@ -90,8 +90,9 @@ public class WebSecurityConfig {
                                 "/crud/**"
                         ).hasRole("ADMIN")
 
-                        .anyRequest()
-                        .authenticated()
+                        // Unmapped public URLs must reach MVC's 404 handling.
+                        // Protected application routes are listed above.
+                        .anyRequest().permitAll()
                 )
 
                 .csrf(csrf -> csrf
@@ -113,21 +114,21 @@ public class WebSecurityConfig {
 
                         .defaultAuthenticationEntryPointFor(
                                 (request, response, authException) ->
-                                        response.sendRedirect("/login"),
+                                        response.sendRedirect(request.getContextPath() + "/login"),
                                 request ->
-                                        request.getRequestURI().equals("/user")
+                                        request.getServletPath().equals("/user")
                         )
 
                         .defaultAuthenticationEntryPointFor(
                                 (request, response, authException) ->
-                                        response.sendRedirect("/"),
+                                        response.sendRedirect(request.getContextPath() + "/"),
                                 request ->
-                                        request.getRequestURI().equals("/admin")
+                                        request.getServletPath().equals("/admin")
                         )
 
                         .accessDeniedHandler(
                                 (request, response, accessDeniedException) ->
-                                        response.sendRedirect("/")
+                                        response.sendRedirect(request.getContextPath() + "/")
                         )
                 );
 

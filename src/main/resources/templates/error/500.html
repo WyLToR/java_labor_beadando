@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="hu" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{head :: head('MoziDB - 500')}"></head>
+  <body class="is-preload">
+    <div id="page-wrapper">
+      <div id="header-wrapper"><div th:replace="~{menu :: menu}"></div></div>
+      <div id="main-wrapper">
+        <div class="container">
+          <section class="box last">
+            <header class="page-header">
+              <h2>500 – Váratlan szerverhiba történt</h2>
+              <p>A kérés feldolgozása közben hiba történt. Kérjük, próbáld újra később.</p>
+            </header>
+            <a class="button" th:href="@{/}">Vissza a főoldalra</a>
+          </section>
+        </div>
+      </div>
+      <div th:replace="~{footer :: footer}"></div>
+    </div>
+    <div th:replace="~{scripts :: scripts}"></div>
+  </body>
+</html>
