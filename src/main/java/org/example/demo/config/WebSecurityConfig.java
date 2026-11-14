@@ -46,10 +46,11 @@ public class WebSecurityConfig {
                             authority.getAuthority().equals("ROLE_ADMIN"));
 
             if (isAdmin) {
-                response.sendRedirect("/admin");
+                response.sendRedirect(request.getContextPath() + "/admin");
             } else {
-                response.sendRedirect("/user");
+                response.sendRedirect(request.getContextPath() + "/user");
             }
+
         };
     }
 
